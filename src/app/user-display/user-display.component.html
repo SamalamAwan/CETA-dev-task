@@ -1,0 +1,91 @@
+<div fxFlex="100"  *ngIf="!loading && !loading">
+    <table fxFlex="80" mat-table [dataSource]="users" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let users">{{ users.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let users">{{ users.email }}</td>
+        </ng-container>
+        <ng-container matColumnDef="address">
+            <th mat-header-cell *matHeaderCellDef>Address</th>
+            <td mat-cell *matCellDef="let users">{{ users.address.suite }}, {{ users.address.street }}, {{ users.address.city }}, {{ users.address.zipcode }}</td>
+        </ng-container>
+        <ng-container matColumnDef="website">
+            <th mat-header-cell *matHeaderCellDef>Website</th>
+            <td mat-cell *matCellDef="let users">{{ users.website }}</td>
+        </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td mat-cell *matCellDef="let users"><button (click)="deleteUser(users.id)" mat-raised-button color="warn">Delete</button></td>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td mat-cell *matCellDef="let users"><button (click)="editUser(users.id)" mat-raised-button color="warn">Edit</button></td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let users; columns: columns"></tr>
+    </table>
+    <div fxFlex="20" class="form-container">
+        <h1 class="mat-h1">Add New Users</h1>
+        <form (submit)="addUser()">
+            <mat-form-field>
+                <input [(ngModel)]="nameInput" name="nameInput" matInput placeholder="Name"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="emailInput" name="emailInput" matInput placeholder="Email"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="suiteInput" name="suiteInput" matInput placeholder="suite"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="streetInput" name="streetInput" matInput placeholder="Steet"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="cityInput" name="cityInput" matInput placeholder="City"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="zipcodeInput" name="zipcodeInput" matInput placeholder="Zipcode"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="websiteInput" name="websiteInput" matInput placeholder="Website"/>
+            </mat-form-field>
+            <button mat-raised-button color="primary">Add User</button>
+        </form>
+        <mat-toolbar *ngIf="successMsg" color="accent">{{ successMsg }}</mat-toolbar><br/>
+        <mat-toolbar *ngIf="errorMsg" color="warn">{{ errorMsg }}</mat-toolbar><br/>
+    </div>
+    <div fxFlex="20" class="form-container" id="edit-form" *ngIf="editable">
+        <h1 class="mat-h1">Edit Users</h1>
+        <form (submit)="submitEditUser()">
+            <mat-form-field>
+                <input [(ngModel)]="nameEdit" name="nameEdit" matInput placeholder="Name"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="emailEdit" name="emailEdit" matInput placeholder="Email"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="suiteEdit" name="suiteEdit" matInput placeholder="Suite"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="streetEdit" name="streetEdit" matInput placeholder="Steet"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="cityEdit" name="cityEdit" matInput placeholder="City"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="zipcodeEdit" name="zipcodeEdit" matInput placeholder="Zipcode"/>
+            </mat-form-field>
+            <mat-form-field>
+                <input [(ngModel)]="websiteEdit" name="websiteEdit" matInput placeholder="Website"/>
+            </mat-form-field>
+            <mat-form-field *ngHide>
+                <input [(ngModel)]="idEdit" name="idEdit" matInput placeholder="id"/>
+            </mat-form-field>
+            <button mat-raised-button color="primary">Save User</button>
+        </form>
+    </div>
+    
+</div>
+
