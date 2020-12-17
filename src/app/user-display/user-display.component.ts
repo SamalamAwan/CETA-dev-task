@@ -40,7 +40,6 @@ export class UserDisplayComponent implements OnInit {
       .subscribe((users: User[]) => {
         this.users = users;
         this.loading = false;
-        console.log(this.users)
       },
       (error: ErrorEvent) => {
         this.errorMsg = error.error.message;
@@ -70,7 +69,6 @@ export class UserDisplayComponent implements OnInit {
     let editableUser = newUsers.filter((newUsers) => newUsers.id == this.idEdit)
     editableUser[0].name = this.nameEdit;
     editableUser[0].email = this.emailEdit;
-    console.log(editableUser[0])
     editableUser[0].address.suite = this.suiteEdit;
     editableUser[0].address.street = this.streetEdit;
     editableUser[0].address.city = this.cityEdit;
